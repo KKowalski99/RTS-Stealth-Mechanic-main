@@ -1,0 +1,44 @@
+using UnityEngine;
+
+namespace Enemies.States
+{
+    public sealed class State_Chase : State
+    {
+        Transform _target;
+        Vector3 _lastKnownTargetPosition;
+        bool _followLastKnownPositionAfterTargetOutOfRange;
+        public override void OnStart(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        {
+            _target = enemy.enemyVision._targetReferance;
+            enemy._agent.enabled = true;
+            enemy.characterAnimations.PlayAnimation(Common.Names.AnimationNames.movementAnimationName);
+            enemy._agent.speed = enemy.runSpeed;
+            enemy.characterAnimations.SetCharacterSpeed(1f);
+        }
+        public override void OnTick(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        {
+            CheckIfTargetsInVision(enemy);
+            _target = enemy.enemyVision._targetReferance;
+
+            if (_target != null)
+            {
+                _lastKnownTargetPosition = _target.position;
+                float distance = Vector3.Distance(enemy.transform.position, _target.position);
+                _followLastKnownPositionAfterTargetOutOfRange = true;
+
+                if (distance > 1.5f) enemy._agent.SetDestination(_target.position); 
+               else OnExit(stateMachine, enemy, stateMachine.attack);
+            }
+            else if (_target == null && _followLastKnownPositionAfterTargetOutOfRange == true)
+            {
+                float distance = Vector3.Distance(enemy.transform.position, _lastKnownTargetPosition);
+
+                if (distance > 0.4) enemy._agent.SetDestination(_lastKnownTargetPosition);
+                else _followLastKnownPositionAfterTargetOutOfRange = false;
+            }
+            else OnExit(stateMachine, enemy, stateMachine.lookAround);
+        }
+        void CheckIfTargetsInVision(Enemies.Core.Enemy _enemy) => _enemy.CheckVision();
+        public override void OnExit(StateMachine stateMachine, Enemies.Core.Enemy enemy, State state) => stateMachine.ChangeState(state);
+    }
+}
