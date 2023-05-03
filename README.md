@@ -14,4 +14,5 @@ Project features:
  - Assemblies
  - Debug tool
 
+Video on YouTube: https://youtu.be/PlX5i_snw7c
  
