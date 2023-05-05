@@ -1,17 +1,18 @@
 using UnityEngine;
+using Enemies.Core;
 
 namespace Enemies.States
 {
     public sealed class State_LookAround : State
     {
         float time;
-        public override void OnStart(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnStart(StateMachine stateMachine, Enemy enemy)
         {
             enemy._agent.enabled = false;
             enemy.characterAnimations.PlayAnimation(Common.Names.AnimationNames.lookAroundAnimationName);
             
         }
-        public override void OnTick(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnTick(StateMachine stateMachine, Enemy enemy)
         {
             time += Time.deltaTime;
 
@@ -23,8 +24,8 @@ namespace Enemies.States
             if(time > enemy.lookAroundDuration) 
                 OnExit(stateMachine, enemy, stateMachine.patrol);
         }
-        void CheckIfTargetsInVision(Enemies.Core.Enemy _enemy) => _enemy.CheckVision();
-        public override void OnExit(StateMachine stateMachine, Enemies.Core.Enemy enemy, State state)
+        void CheckIfTargetsInVision(Enemy _enemy) => _enemy.CheckVision();
+        public override void OnExit(StateMachine stateMachine, Enemy enemy, State state)
         {
             time = 0;
             enemy._agent.enabled = true;

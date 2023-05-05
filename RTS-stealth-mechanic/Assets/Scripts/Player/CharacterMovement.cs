@@ -8,7 +8,7 @@ namespace PlayerCharacter.Core
     public sealed class CharacterMovement : MonoBehaviour, Common.Interfaces.IEventListenable
     {
         Actions _actions;
-        [Tooltip("Connect InputHandler from InputHandler Script")] [SerializeField] InputHandler _inputHandler;
+        [Tooltip("Connect InputHandler from InputHandler Script")] [SerializeField] InputActionsHolder _inputHandler;
         [SerializeField] Camera _mainCamera;
         [Tooltip("Debug object moved to player target move positon on click")] [SerializeField] Transform _destinationPointer;
         [SerializeField] bool _isDestinationPointerActive = true;

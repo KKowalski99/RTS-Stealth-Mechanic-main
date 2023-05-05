@@ -10,13 +10,13 @@ namespace PlayerCharacter.Core
         bool _stealthActive;
 
         Actions _actions;
-        [SerializeField] InputHandler _inputHandler;
+        [SerializeField] InputActionsHolder _inputHandler;
 
         [SerializeField] LayerMask _interactionMask;
-        private void Start() => _actions = _inputHandler._actions;
+        void Start() => _actions = _inputHandler._actions;
 
 
-        private void Update()
+       void Update()
         {
             StealthAssasinationAvailable();
             StealthMode();

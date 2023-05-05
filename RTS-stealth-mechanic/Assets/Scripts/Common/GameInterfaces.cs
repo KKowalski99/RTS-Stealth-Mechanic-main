@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +16,8 @@ namespace Common.Interfaces
 
     public interface IOutlineOnMouseOver
     {
-        [field: SerializeField] public Outline outlinbe { get; set; }
-        public void EnableOutline();
-        public void DisableOutline();
+        [field: SerializeField] public Outline outline { get; set; }
+        public void ToggleOutline(bool enable);
 
     }
     public interface IPatrol
@@ -27,7 +25,7 @@ namespace Common.Interfaces
         [field: SerializeField] public List<Transform> patrolPoits { get { return patrolPoits; } set { patrolPoits = new List<Transform>(); } }
     }
 
-    public interface IEnemyTarget { } ///////////////////////$$$$$$$$$$$$$$$$
+    public interface IEnemyTarget { }
     public interface IDamageable
     {
         public void GetDamage(float damage);

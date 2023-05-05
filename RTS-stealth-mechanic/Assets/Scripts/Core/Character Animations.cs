@@ -1,4 +1,5 @@
 using UnityEngine;
+using Common.Names;
 
 [RequireComponent(typeof(Animator))]
 public sealed class CharacterAnimations : MonoBehaviour, Common.Interfaces.IEventListenable
@@ -11,9 +12,7 @@ public sealed class CharacterAnimations : MonoBehaviour, Common.Interfaces.IEven
     public void SetCharacterSpeed(float speed)
     {
         if (speed < 0) return;
-
-        anim.SetFloat(Common.Names.AnimationNames.variableNameSpeed, speed);
-
+        anim.SetFloat(AnimationNames.variableNameSpeed, speed);
     }
     public void PlayAnimation(string animationName)
     {

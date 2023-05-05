@@ -1,4 +1,6 @@
 using UnityEngine;
+using Enemies.Core;
+using Common.Names;
 
 namespace Enemies.States
 {
@@ -7,15 +9,15 @@ namespace Enemies.States
         Transform _target;
         Vector3 _lastKnownTargetPosition;
         bool _followLastKnownPositionAfterTargetOutOfRange;
-        public override void OnStart(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnStart(StateMachine stateMachine, Enemy enemy)
         {
             _target = enemy.enemyVision._targetReferance;
             enemy._agent.enabled = true;
-            enemy.characterAnimations.PlayAnimation(Common.Names.AnimationNames.movementAnimationName);
+            enemy.characterAnimations.PlayAnimation(AnimationNames.movementAnimationName);
             enemy._agent.speed = enemy.runSpeed;
             enemy.characterAnimations.SetCharacterSpeed(1f);
         }
-        public override void OnTick(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnTick(StateMachine stateMachine, Enemy enemy)
         {
             CheckIfTargetsInVision(enemy);
             _target = enemy.enemyVision._targetReferance;
@@ -38,7 +40,7 @@ namespace Enemies.States
             }
             else OnExit(stateMachine, enemy, stateMachine.lookAround);
         }
-        void CheckIfTargetsInVision(Enemies.Core.Enemy _enemy) => _enemy.CheckVision();
-        public override void OnExit(StateMachine stateMachine, Enemies.Core.Enemy enemy, State state) => stateMachine.ChangeState(state);
+        void CheckIfTargetsInVision(Enemy _enemy) => _enemy.CheckVision();
+        public override void OnExit(StateMachine stateMachine, Enemy enemy, State state) => stateMachine.ChangeState(state);
     }
 }

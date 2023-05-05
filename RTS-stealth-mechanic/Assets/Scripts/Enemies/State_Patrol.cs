@@ -1,4 +1,6 @@
 using UnityEngine;
+using Enemies.Core;
+using Common.Names;
 
 namespace Enemies.States
 {
@@ -6,7 +8,7 @@ namespace Enemies.States
     {
         Transform[] _patrolPoints;
         int index = 0;
-        public override void OnStart(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnStart(StateMachine stateMachine, Enemy enemy)
         {
              _patrolPoints = enemy.patrolPoits.ToArray();
 
@@ -15,10 +17,10 @@ namespace Enemies.States
 
             enemy._agent.enabled = true;
             enemy._agent.speed = enemy.walkSpeed;
-            enemy.characterAnimations.PlayAnimation(Common.Names.AnimationNames.movementAnimationName);
+            enemy.characterAnimations.PlayAnimation(AnimationNames.movementAnimationName);
             enemy.characterAnimations.SetCharacterSpeed(0.5f);
         }
-        public override void OnTick(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnTick(StateMachine stateMachine, Enemy enemy)
         {
             CheckIfTargetsInVision(enemy);
             if (enemy.enemyVision._targetReferance != null) OnExit(stateMachine, enemy, stateMachine.chase);
@@ -36,7 +38,7 @@ namespace Enemies.States
 
             if (enemy.enemyVision._targetReferance != null) OnExit(stateMachine, enemy, stateMachine.chase);
         }
-        void CheckIfTargetsInVision(Enemies.Core.Enemy _enemy) => _enemy.CheckVision();
-        public override void OnExit(StateMachine stateMachine, Enemies.Core.Enemy enemy, State state) => stateMachine.ChangeState(state);
+        void CheckIfTargetsInVision(Enemy _enemy) => _enemy.CheckVision();
+        public override void OnExit(StateMachine stateMachine, Enemy enemy, State state) => stateMachine.ChangeState(state);
     }
 }

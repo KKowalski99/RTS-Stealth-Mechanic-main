@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Enemies.Core;
 
 namespace Enemies.States
 {
@@ -13,13 +12,13 @@ namespace Enemies.States
         bool isPerformingAttack;
 
         float time;
-        public override void OnStart(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnStart(StateMachine stateMachine, Enemy enemy)
         {
             enemy._agent.enabled = false;
             time = enemy.attackCooldown;
         }
 
-        public override void OnTick(StateMachine stateMachine, Enemies.Core.Enemy enemy)
+        public override void OnTick(StateMachine stateMachine, Enemy enemy)
         {
             CheckIfTargetsInVision(enemy);
             target = enemy.enemyVision._targetReferance;
@@ -49,7 +48,7 @@ namespace Enemies.States
                 OnExit(stateMachine, enemy, stateMachine.lookAround);
             }
         }
-        void AttackCooldown(Enemies.Core.Enemy enemy)
+        void AttackCooldown(Enemy enemy)
         {
             if(isPerformingAttack)
             {
@@ -61,11 +60,11 @@ namespace Enemies.States
                 }
             }
         }
-        void CheckIfTargetsInVision(Enemies.Core.Enemy _enemy)
+        void CheckIfTargetsInVision(Enemy _enemy)
         {
             _enemy.CheckVision();
         }
-        public override void OnExit(StateMachine stateMachine, Enemies.Core.Enemy enemy, State state)
+        public override void OnExit(StateMachine stateMachine, Enemy enemy, State state)
         {
             stateMachine.ChangeState(state);
         }

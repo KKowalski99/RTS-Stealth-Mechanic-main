@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies.Core
 {
-    public sealed class EnemyCombatTargetDetection : MonoBehaviour, Common.Interfaces.IHearable
+    public sealed class EnemyCombatTargetDetection : MonoBehaviour
     {
         #region Vision
         [SerializeField] float _visionConeRadius;
@@ -54,26 +54,5 @@ namespace Enemies.Core
             }
         }
 
-#if UNITY_EDITOR
-        public float visionConeRadius = 100;
-        public float visionConeAngle = 45;
-        public void Construct()
-        {
-            Debug.Log("Construktor");
-            visionConeRadius = _visionConeRadius;
-            visionConeAngle = _visionConeAngle;
-        }
-        public void IsTargetDetected(float noiseLevel, Transform target)
-        {
-            if (noiseLevel > minNoiseLevelDetection)
-            {
-                _targetInSight = target;
-            }
-            else
-            {
-                return;
-            }
-        }
-#endif
     }
 }

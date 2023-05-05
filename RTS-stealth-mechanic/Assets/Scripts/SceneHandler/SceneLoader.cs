@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Common.Names;
 
 namespace SceneHandler
 {
@@ -21,17 +22,17 @@ namespace SceneHandler
 
         private void Start()
         {
-            if (scene.name == Common.Names.SceneNames.gameLogicSceneName)
+            if (scene.name == SceneNames.coreSceneName)
             {
-                if (SceneManager.GetSceneByName(Common.Names.SceneNames.uiSceneName).isLoaded == false)
-                    SceneManager.LoadSceneAsync(Common.Names.SceneNames.uiSceneName, mode: LoadSceneMode.Additive);
+                if (SceneManager.GetSceneByName(SceneNames.uiSceneName).isLoaded == false)
+                    SceneManager.LoadSceneAsync(SceneNames.uiSceneName, mode: LoadSceneMode.Additive);
 
-                if (SceneManager.GetSceneByName(Common.Names.SceneNames.environmentSceneName).isLoaded == false)
-                    SceneManager.LoadSceneAsync(Common.Names.SceneNames.environmentSceneName, mode: LoadSceneMode.Additive);
+                if (SceneManager.GetSceneByName(SceneNames.environmentSceneName).isLoaded == false)
+                    SceneManager.LoadSceneAsync(SceneNames.environmentSceneName, mode: LoadSceneMode.Additive);
             }
         }
-         void Restart() => SceneManager.LoadScene(Common.Names.SceneNames.gameLogicSceneName);
-         void LoadDeathScene() => SceneManager.LoadScene(Common.Names.SceneNames.deathSceneName);
+         void Restart() => SceneManager.LoadScene(SceneNames.coreSceneName);
+         void LoadDeathScene() => SceneManager.LoadScene(SceneNames.deathSceneName);
 
         public void OnEnable()
         {
