@@ -1,4 +1,4 @@
-# RTS-Stealth
+# RTS-Stealth-Mechanic
 
 Game features: 
  - Player mouse-based movement
